@@ -32,6 +32,10 @@ events_merged['prev_timestamp']=(events_merged.sort_values(by=['timestamp'], asc
                                          .groupby(['device_id'])['timestamp'].shift(1))
 
 events_merged['ignored']=events_merged.apply(prepare_final,axis=1)
+print(events_merged.head())
+events_merged['day'] = events_merged['timestamp'].dt.date
+events_grouped = events_merged.groupby('day').count()
+print(events_grouped)
 print("end:{}".format(datetime.datetime.now()))
 """
 Your first task is to create a stacked chart of **unique online devices per
